@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<CommunityApplications>
+  <Profile>
+Templates for apps made by **My Media Build**, a home server and media server blog.
+
+- **Library Doctor**: a nightly health check for your Plex library. It compares Plex with Radarr, Sonarr and what's really on the disk, and lists what needs fixing (missing files, duplicates, broken or dubbed copies, stuck downloads), with a button to fix most of it. Nothing is deleted without asking.
+
+Support: open an issue on each app's GitHub page (linked from its template).
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/spikey1965/library-doctor/main/assets/icon-512.png</Icon>
+  <WebPage>https://github.com/spikey1965/library-doctor</WebPage>
+  <DonateLink>https://buymeacoffee.com/bobgreggr</DonateLink>
+  <DonateText>Buy me a coffee</DonateText>
+  <Photo>https://raw.githubusercontent.com/spikey1965/library-doctor/main/assets/tour.gif</Photo>
+</CommunityApplications>
