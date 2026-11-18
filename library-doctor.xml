@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>library-doctor</Name>
+  <Repository>ghcr.io/spikey1965/library-doctor:latest</Repository>
+  <Registry>https://github.com/spikey1965/library-doctor/pkgs/container/library-doctor</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/spikey1965/library-doctor/issues</Support>
+  <Project>https://github.com/spikey1965/library-doctor</Project>
+  <Overview>A nightly health check for Plex, Radarr and Sonarr. Library Doctor checks your Plex library against Radarr, Sonarr and what's really on the disk, and tells you what needs fixing: missing files, duplicates (with which copy to keep and why), broken or too-short files, dubbed copies in the wrong language, episodes that never downloaded, subtitles that are only adverts, files far bigger than they need to be, and your apps' own warnings. Nothing is deleted without asking: every clean-up moves files to a trash folder on the same disk for 7 days first.[br][br]An Analysis tab shows a library score (file integrity, quality, metadata, duplicates, app sync), trends, storage recovered and quality per library.[br][br]After installing, open the WebUI, set a password, then add Plex and Radarr/Sonarr in Settings. Settings &#x2192; Folder check shows whether each app sees your media at the same place as Library Doctor and suggests a mapping if not.[br][br]Media path: point it at the share that holds your films and shows (one folder, mounted read-write), for example /mnt/user/data/media.</Overview>
+  <Category>MediaApp:Video Tools: Status:Beta</Category>
+  <WebUI>http://[IP]:[PORT:8790]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/spikey1965/library-doctor/main/extras/unraid/library-doctor.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/spikey1965/library-doctor/main/assets/icon-512.png</Icon>
+  <ExtraParams>--read-only --tmpfs /tmp --security-opt no-new-privileges:true</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText>Buy me a coffee</DonateText>
+  <DonateLink>https://buymeacoffee.com/bobgreggr</DonateLink>
+  <Requires>Plex plus at least one Radarr or Sonarr. Bazarr, Tautulli, Tdarr, Prowlarr and ClamAV are optional.</Requires>
+  <Config Name="WebUI port" Target="8790" Default="8790" Mode="tcp" Description="Port for the web page." Type="Port" Display="always" Required="true" Mask="false">8790</Config>
+  <Config Name="Media" Target="/media" Default="/mnt/user/data/media" Mode="rw" Description="The share with your films and shows (one folder that contains them all). Read-write: clean-ups move files into a hidden .library-doctor-trash folder inside it, which is instant on the same disk." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/data/media</Config>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/library-doctor" Mode="rw" Description="Settings, password and the database." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/library-doctor</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User that owns your media (Unraid default: 99 = nobody)." Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group that owns your media (Unraid default: 100 = users)." Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
+  <Config Name="Time zone" Target="TZ" Default="Europe/London" Mode="" Description="Your time zone, for the nightly scan." Type="Variable" Display="always" Required="false" Mask="false">Europe/London</Config>
+  <Config Name="Scan hour" Target="LD_SCAN_HOUR" Default="3" Mode="" Description="Hour of the automatic scan until you set days and a time in Settings. On arrays whose disks spin down, scanning once a week (Settings) lets them sleep." Type="Variable" Display="advanced" Required="false" Mask="false">3</Config>
+  <Config Name="Built-in login" Target="LD_AUTH" Default="on" Mode="" Description="on = Library Doctor asks for its own password. Only set off if another login (Authelia, Authentik, your proxy) protects the page." Type="Variable" Display="advanced" Required="false" Mask="false">on</Config>
+  <Config Name="Trusted proxies" Target="LD_TRUSTED_PROXIES" Default="" Mode="" Description="Optional, behind a reverse proxy: its address or range (e.g. 172.17.0.0/16 for a proxy container on Unraid's default network). Only then are its forwarded visitor addresses believed. With the login off, only these addresses get an answer." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Allowed host names" Target="LD_ALLOWED_HOSTS" Default="" Mode="" Description="Optional: the name(s) you open Library Doctor by, comma-separated (e.g. ld.example.com). Other names are refused, which stops DNS rebinding. Strongly recommended when the built-in login is off. IP addresses always work." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Incomplete folder: days untouched" Target="LD_INCOMPLETE_DAYS" Default="3" Mode="" Description="Downloads: how many days an item in your download clients' incomplete folder must be untouched (and unknown to every client) before it's offered for the trash." Type="Variable" Display="advanced" Required="false" Mask="false">3</Config>
+  <Config Name="ClamAV host" Target="LD_CLAMD_HOST" Default="" Mode="" Description="Optional: your ClamAV container's address, for the Virus Scan check." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Night download window ends" Target="LD_DOWNLOAD_WINDOW_END" Default="" Mode="" Description="Optional: if downloads only run at night, the hour that window ends (e.g. 7)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>
